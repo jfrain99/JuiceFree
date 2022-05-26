@@ -19,7 +19,7 @@ const options = {
   method: "GET",
   headers: {
     "X-RapidAPI-Host": "tennis-live-data.p.rapidapi.com",
-    "X-RapidAPI-Key": import.meta.env.SOLID_APP_RAPID_API_KEY as string,
+    "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY as string,
   },
 }
 
