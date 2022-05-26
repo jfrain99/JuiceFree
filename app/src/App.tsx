@@ -2,8 +2,16 @@ import { Link, Route, Router, Routes } from "solid-app-router"
 import type { Component } from "solid-js"
 import { createSignal, For } from "solid-js"
 
+import TennisMatchCard from "./components/TennisMatchCard"
+
+interface player {
+  first_name: string
+  last_name: string
+}
 interface Match {
   title: string
+  away: player
+  home: player
 }
 
 const [matches, setMatches] = createSignal([] as Match[])
@@ -11,7 +19,7 @@ const options = {
   method: "GET",
   headers: {
     "X-RapidAPI-Host": "tennis-live-data.p.rapidapi.com",
-    "X-RapidAPI-Key": "46f0fdf551msh9094c4f085a134ep184946jsn689833af3b3e",
+    "X-RapidAPI-Key": import.meta.env.SOLID_APP_RAPID_API_KEY as string,
   },
 }
 
@@ -36,7 +44,7 @@ const retrieveMatches = () => {
 }
 
 const logMatches = () => {
-  // console.log(matches())
+  console.log(matches())
 }
 
 const Home: Component = () => (
@@ -74,12 +82,13 @@ const InProgress: Component = () => (
     </div>
     <div>
       <For each={matches()}>
-        {(match, i) => {
+        {(match) => {
           return (
-            <>
-              <h1>{match.title}</h1>
-              <br />
-            </>
+            <TennisMatchCard
+              title={match.title}
+              away={match.away}
+              home={match.home}
+            />
           )
         }}
       </For>
