@@ -1,26 +1,47 @@
 import type { Component } from 'solid-js';
-
-import logo from './logo.svg';
+import {  } from 'solid-js';
+import { Router, Routes, Route, Link } from 'solid-app-router';
 import styles from './App.module.css';
+
+const Home: Component = () => (
+  <>
+    <h1>Welcome to this Simple Routing Example</h1>
+    <p>Click the links in the Navigation above to load different routes.</p>
+  </>
+);
+
+const Profile: Component = () => (
+  <>
+    <h1>Your Profile</h1>
+    <p>This section could be about you.</p>
+  </>
+);
+
+const Settings: Component = () => (
+  <>
+    <h1>Settings</h1>
+    <p>All that configuration you never really ever want to look at.</p>
+  </>
+);
 
 const App: Component = () => {
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <div class={styles.app}>
+          <Link href="/">Home</Link>
+          <Link href="/profile">Profile</Link>
+          <Link href="/settings">Settings</Link>
+
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
+
+          </Routes>
+        </div>
+      </Router>
+    </>
   );
 };
 
