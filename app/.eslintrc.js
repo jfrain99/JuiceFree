@@ -18,7 +18,7 @@ module.exports = {
   plugins: ["solid", "@typescript-eslint", "simple-import-sort", "import"],
   rules: {
     "@typescript-eslint/ban-ts-comment": 0,
-    "no-console": ["error", { allow: ["warn", "error", "info"] }],
+    "no-console": ["warn"],
     "spaced-comment": "error",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
