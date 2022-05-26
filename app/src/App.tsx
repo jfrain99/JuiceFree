@@ -1,19 +1,19 @@
-import type { Component } from "solid-js";
-import { createSignal, For } from "solid-js";
-import { Router, Routes, Route, Link } from "solid-app-router";
+import { Link, Route, Router, Routes } from "solid-app-router"
+import type { Component } from "solid-js"
+import { createSignal, For } from "solid-js"
 
 interface Match {
   title: string
 }
 
-const [matches, setMatches] = createSignal([] as Match[]);
+const [matches, setMatches] = createSignal([] as Match[])
 const options = {
   method: "GET",
   headers: {
     "X-RapidAPI-Host": "tennis-live-data.p.rapidapi.com",
     "X-RapidAPI-Key": "46f0fdf551msh9094c4f085a134ep184946jsn689833af3b3e",
   },
-};
+}
 
 const getMatches = async () => {
   await fetch(
@@ -22,22 +22,22 @@ const getMatches = async () => {
   )
     .then((response) => response.json())
     .then((response) => {
-      console.log(response);
-      return response;
+      // console.log(response)
+      return response
     })
     .then((response) =>
       localStorage.setItem("matches", JSON.stringify(response))
-    );
-};
+    )
+}
 
 const retrieveMatches = () => {
-  const matchStr = localStorage.getItem("matches") || '{}';
-  setMatches(JSON.parse(matchStr)?.results?.[0]?.matches ?? []);
-};
+  const matchStr = localStorage.getItem("matches") || "{}"
+  setMatches(JSON.parse(matchStr)?.results?.[0]?.matches ?? [])
+}
 
 const logMatches = () => {
-  console.log(matches());
-};
+  // console.log(matches())
+}
 
 const Home: Component = () => (
   <>
@@ -46,7 +46,7 @@ const Home: Component = () => (
       Click the links in the Navigation above to load different routes.
     </p>
   </>
-);
+)
 
 const InProgress: Component = () => (
   <>
@@ -75,15 +75,17 @@ const InProgress: Component = () => (
     <div>
       <For each={matches()}>
         {(match, i) => {
-          return (<>
-            <h1>{match.title}</h1>
-            <br />
-          </>)
+          return (
+            <>
+              <h1>{match.title}</h1>
+              <br />
+            </>
+          )
         }}
       </For>
     </div>
   </>
-);
+)
 
 const Settings: Component = () => (
   <>
@@ -92,7 +94,7 @@ const Settings: Component = () => (
       All that configuration you never really ever want to look at.
     </p>
   </>
-);
+)
 
 const App: Component = () => {
   return (
@@ -113,7 +115,7 @@ const App: Component = () => {
         </div>
       </Router>
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App
