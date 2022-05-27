@@ -23,7 +23,6 @@ const options = {
   },
 }
 
-console.log()
 const getMatches = async () => {
   await fetch(
     "https://tennis-live-data.p.rapidapi.com/matches-by-date/2022-05-26",
